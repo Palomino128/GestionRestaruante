@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Cliente - Sabor Peruano</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container d-flex align-items-center justify-content-center" style="height: 100vh;">
+    <div class="card shadow" style="width: 420px;">
+        <div class="card-header bg-danger text-white text-center">
+            <h4>Registro de Cliente</h4>
+        </div>
+
+        <div class="card-body">
+
+            <!-- Mensaje de error si algo falla -->
+            <div th:if="${error}" class="alert alert-danger text-center">
+                <span th:text="${error}"></span>
+            </div>
+
+            <form th:action="@{/registro}" method="post">
+
+                <div class="mb-3">
+                    <label class="form-label">Nombres</label>
+                    <input type="text" class="form-control" name="nombres" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Apellidos</label>
+                    <input type="text" class="form-control" name="apellidos" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Usuario</label>
+                    <input type="text" class="form-control" name="usuario" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Correo electrónico</label>
+                    <input type="email" class="form-control" name="email" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" name="clave" required>
+                </div>
+
+                <button type="submit" class="btn btn-danger w-100">
+                    Registrarme
+                </button>
+
+                <p class="text-center mt-3 mb-0">
+                    ¿Ya tienes cuenta?
+                    <a href="/login">Inicia sesión</a>
+                </p>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

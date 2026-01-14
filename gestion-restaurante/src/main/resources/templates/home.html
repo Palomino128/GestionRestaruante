@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio - Cliente</title>
+</head>
+<body>
+<section>
+    <div class="container py-5">
+        <h1 class="mb-4"><i class="fas fa-user"></i> Bienvenido Cliente</h1>
+
+        <p class="lead">
+            Hola <strong th:text="${session.usuarioLogeado != null ? session.usuarioLogeado.nombres : 'Cliente'}">Cliente</strong>,
+            gracias por usar Sabor Peruano.
+        </p>
+
+        <div class="mt-4">
+            <a class="btn btn-danger" href="/" role="button"><i class="fas fa-home"></i> Ir al sitio</a>
+            <a class="btn btn-outline-secondary ms-2" th:href="@{/logout}" role="button"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+        </div>
+    </div>
+</section>
+</body>
+</html>

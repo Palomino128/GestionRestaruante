@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservar Mesa - Sabor Peruano</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #dc3545;
+            --secondary-color: #ffc107;
+            --dark-color: #1a1a1a;
+            --light-color: #f8f9fa;
+        }
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+        }
+        .navbar {
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: var(--primary-color) !important;
+        }
+        .nav-link {
+            font-weight: 500;
+            margin: 0 10px;
+        }
+        .card-reserva {
+            border-radius: 16px;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        .card-header-reserva {
+            border-radius: 16px 16px 0 0;
+            background: linear-gradient(135deg, #dc3545, #ff7676);
+            color: #fff;
+        }
+        .badge-mesa {
+            font-size: 0.9rem;
+            padding: 0.4rem 0.7rem;
+            border-radius: 999px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR (simple y consistente con tu estilo) -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <i class="fas fa-utensils me-2"></i>SABOR PERUANO
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNavReserva">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavReserva">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Inicio</a>
+                </li>
+
+                <!-- NO logueado -->
+                <li class="nav-item"
+                    th:if="${request.session.getAttribute('usuarioLogeado') == null}">
+                    <a class="nav-link btn btn-outline-light ms-2" href="/login">
+                        <i class="fas fa-user me-1"></i>Iniciar Sesión
+                    </a>
+                </li>
+
+                <!-- Logueado -->
+                <li class="nav-item d-flex align-items-center"
+    th:if="${request.session.getAttribute('usuarioLogeado') != null}">
+    <span class="nav-link text-white">
+        <i class="fas fa-user me-1"></i>
+        Usuario logueado
+    </span>
+</li>
+
+                <li class="nav-item"
+                    th:if="${request.session.getAttribute('usuarioLogeado') != null}">
+                    <a class="nav-link btn btn-outline-light ms-2" href="/logout">
+                        <i class="fas fa-sign-out-alt me-1"></i>Salir
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- CONTENIDO -->
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+
+            <div class="card card-reserva">
+                <div class="card-header card-header-reserva d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="mb-0">
+                            <i class="fas fa-calendar-check me-2"></i>Reservar mesa
+                        </h4>
+                        <small class="d-block mt-1">Elige una mesa disponible y completa tu reserva.</small>
+                    </div>
+                    <span class="badge bg-dark">
+                        <i class="fas fa-clock me-1"></i>Reserva válida 5 min sin pago
+                    </span>
+                </div>
+
+                <div class="card-body p-4">
+
+                    <!-- Mensajes flash -->
+                    <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+                    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+                    <!-- Aviso si NO está logueado -->
+                    <div th:if="${request.session.getAttribute('usuarioLogeado') == null}"
+                         class="alert alert-warning">
+                        Debes <a href="/login" class="alert-link">iniciar sesión</a> como cliente para reservar una mesa.
+                    </div>
+
+                    <!-- Aviso si rol != CLIENTE -->
+                    <div th:if="${request.session.getAttribute('usuarioLogeado') != null
+                                 and !#strings.equalsIgnoreCase(request.session.getAttribute('usuarioLogeado').rol, 'CLIENTE')}"
+                         class="alert alert-warning">
+                        Solo los usuarios con rol <strong>CLIENTE</strong> pueden reservar mesa.
+                    </div>
+
+                    <!-- FORMULARIO SOLO SI ES CLIENTE LOGUEADO -->
+                    <div th:if="${request.session.getAttribute('usuarioLogeado') != null
+                                 and #strings.equalsIgnoreCase(request.session.getAttribute('usuarioLogeado').rol, 'CLIENTE')}">
+
+                        <!-- Mesas disponibles -->
+                        <div class="mb-4">
+                            <h6 class="fw-bold mb-2">
+                                <i class="fas fa-chair me-2 text-danger"></i>Mesas disponibles ahora:
+                            </h6>
+
+                            <p th:if="${#lists.isEmpty(mesasDisponibles)}" class="text-muted mb-0">
+                                No hay mesas disponibles en este momento. Intenta más tarde.
+                            </p>
+
+                            <div th:if="${!#lists.isEmpty(mesasDisponibles)}">
+                                <span class="badge bg-success badge-mesa me-1 mb-1"
+                                      th:each="mesa : ${mesasDisponibles}"
+                                      th:text="'Mesa ' + ${mesa}">
+                                    Mesa
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Formulario -->
+                        <form th:action="@{/reservas}" th:object="${reservaForm}" method="post">
+
+                            <div class="mb-3">
+                                <label for="mesaNumero" class="form-label">Mesa</label>
+                                <select id="mesaNumero" class="form-select" th:field="*{mesaNumero}" required>
+                                    <option value="" disabled selected>Selecciona una mesa</option>
+                                    <option th:each="mesa : ${mesasDisponibles}"
+                                            th:value="${mesa}"
+                                            th:text="'Mesa ' + ${mesa}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="fechaReserva" class="form-label">Fecha y hora</label>
+                                <input type="datetime-local"
+                                       id="fechaReserva"
+                                       class="form-control"
+                                       th:field="*{fechaReserva}"
+                                       required>
+                                <div class="form-text">
+                                    Selecciona el día y la hora en la que deseas venir.
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="personas" class="form-label">Número de personas</label>
+                                <input type="number"
+                                       id="personas"
+                                       class="form-control"
+                                       min="1"
+                                       th:field="*{personas}"
+                                       required>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mt-4">
+                                <a href="/" class="btn btn-outline-secondary">
+                                    <i class="fas fa-arrow-left me-1"></i> Volver al inicio
+                                </a>
+
+                                <!-- BOTÓN RESERVAR MESA DISPONIBLE -->
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fas fa-calendar-check me-2"></i>
+                                    Reservar mesa disponible
+                                </button>
+                            </div>
+                        </form>
+
+                        <hr class="my-4">
+
+                        <p class="text-muted small mb-0">
+                            Una vez creada la reserva, tendrás <strong>5 minutos</strong> para completar el pago.
+                            Si no se registra el pago en ese tiempo, la reserva se eliminará automáticamente y la mesa volverá a estar disponible.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

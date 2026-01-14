@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout (~{::body})">
+<head>
+    <title>Gestión de Menú - Sabor Peruano</title>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+                <!-- Sidebar -->
+        <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar px-2">
+            <div class="position-sticky pt-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/dashboard}" th:classappend="${request.requestURI.startsWith('/admin/dashboard')} ? ' active' : ''">
+                            <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/platos}" th:classappend="${request.requestURI.startsWith('/admin/platos')} ? ' active' : ''">
+                            <i class="fas fa-utensils me-2"></i> Gestión de Platos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/inventario}" th:classappend="${request.requestURI.startsWith('/admin/inventario')} ? ' active' : ''">
+                            <i class="fas fa-boxes me-2"></i> Gestión de Inventario
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/sucursales}" th:classappend="${request.requestURI.startsWith('/admin/sucursales')} ? ' active' : ''">
+                            <i class="fas fa-store me-2"></i> Gestión de Sucursales
+                        </a>
+                    </li>
+<!-- Botón de Gestión de Pedidos -->
+<div class="row mt-4">
+    <div class="col-md-12">
+        <a class="btn btn-outline-primary" th:href="@{/admin/pedidos}">
+            <i class="fas fa-shopping-cart me-1"></i> Gestionar Pedidos
+        </a>
+    </div>
+</div>
+
+
+                    <li class="nav-item mt-3">
+                        <a class="nav-link text-danger" th:href="@{/logout}">
+                            <i class="fas fa-power-off me-2"></i> Cerrar sesión
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Contenido Principal -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h2">Gestión de Menú</h1>
+                <a class="btn btn-primary" th:href="@{/admin/platos}">
+                    <i class="fas fa-plus me-2"></i>Agregar Plato
+                </a>
+            </div>
+
+            <!-- Tabla de Platos -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Plato</th>
+                                    <th>Precio</th>
+                                    <th>Estado</th>
+                                    <th>Disponibilidad</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="plato : ${platos}">
+                                    <td th:text="${plato.nombre}">Lomo Saltado</td>
+                                    <td th:text="'S/ ' + ${plato.precio}">S/ 25.00</td>
+                                    <td>
+                                        <span th:if="${plato.estado}" class="badge bg-success">Activo</span>
+                                        <span th:unless="${plato.estado}" class="badge bg-danger">Inactivo</span>
+                                    </td>
+                                    <td>
+                                        <span th:if="${plato.disponibilidad}" class="badge bg-success">Disponible</span>
+                                        <span th:unless="${plato.disponibilidad}" class="badge bg-danger">Agotado</span>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-sm btn-warning me-1"
+                                           th:href="@{'/admin/platos/editar/' + ${plato.id}}">
+                                           <i class="fas fa-edit"></i>
+                                        </a>
+                                        <form th:action="@{'/admin/platos/eliminar/' + ${plato.id}}"
+                                              method="post" style="display:inline">
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+</body>
+</html>

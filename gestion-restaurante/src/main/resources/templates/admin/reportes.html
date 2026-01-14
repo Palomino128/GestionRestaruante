@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout (~{::body})">
+<head>
+    <title>Reportes - Sabor Peruano</title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar px-2">
+            <div class="position-sticky pt-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/dashboard}"
+                           th:classappend="${request.requestURI.startsWith('/admin/dashboard')} ? ' active' : ''">
+                            <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/menu}"
+                           th:classappend="${request.requestURI.startsWith('/admin/menu')} ? ' active' : ''">
+                            <i class="fas fa-utensils me-2"></i> Gestión de Menú
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/platos}"
+                           th:classappend="${request.requestURI.startsWith('/admin/platos')} ? ' active' : ''">
+                            <i class="fas fa-utensils me-2"></i> Gestión de Platos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/inventario}"
+                           th:classappend="${request.requestURI.startsWith('/admin/inventario')} ? ' active' : ''">
+                            <i class="fas fa-boxes me-2"></i> Gestión de Inventario
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/sucursales}"
+                           th:classappend="${request.requestURI.startsWith('/admin/sucursales')} ? ' active' : ''">
+                            <i class="fas fa-store me-2"></i> Gestión de Sucursales
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/admin/reportes}">
+                            <i class="fas fa-clipboard-list me-2"></i> Reportes
+                        </a>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <a class="nav-link text-danger" th:href="@{/logout}">
+                            <i class="fas fa-power-off me-2"></i> Cerrar sesión
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Contenido Principal -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h2">Reportes</h1>
+            </div>
+
+            <div class="row g-4">
+                <!-- Reporte de Platos -->
+                <div class="col-md-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title">Reporte de Platos</h5>
+                            <a th:href="@{/admin/reportes/platos/pdf}" class="btn btn-danger me-2">
+                                <i class="fas fa-file-pdf"></i> PDF
+                            </a>
+                            <a th:href="@{/admin/reportes/platos/excel}" class="btn btn-success">
+                                <i class="fas fa-file-excel"></i> Excel
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reporte de Insumos -->
+                <div class="col-md-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title">Reporte de Insumos</h5>
+                            <a th:href="@{/admin/reportes/insumos/pdf}" class="btn btn-danger me-2">
+                                <i class="fas fa-file-pdf"></i> PDF
+                            </a>
+                            <a th:href="@{/admin/reportes/insumos/excel}" class="btn btn-success">
+                                <i class="fas fa-file-excel"></i> Excel
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reporte de Inventario -->
+                <div class="col-md-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title">Reporte de Inventario</h5>
+                            <a th:href="@{/admin/reportes/inventario/pdf}" class="btn btn-danger me-2">
+                                <i class="fas fa-file-pdf"></i> PDF
+                            </a>
+                            <a th:href="@{/admin/reportes/inventario/excel}" class="btn btn-success">
+                                <i class="fas fa-file-excel"></i> Excel
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+</body>
+</html>

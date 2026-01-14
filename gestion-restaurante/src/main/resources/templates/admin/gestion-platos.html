@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout (~{::body})">
+<head>
+    <title>Gestión de Platos - Sabor Peruano</title>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+               <!-- Sidebar -->
+        <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar px-2">
+            <div class="position-sticky pt-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/dashboard}" th:classappend="${request.requestURI.startsWith('/admin/dashboard')} ? ' active' : ''">
+                            <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/platos}" th:classappend="${request.requestURI.startsWith('/admin/platos')} ? ' active' : ''">
+                            <i class="fas fa-utensils me-2"></i> Gestión de Platos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/inventario}" th:classappend="${request.requestURI.startsWith('/admin/inventario')} ? ' active' : ''">
+                            <i class="fas fa-boxes me-2"></i> Gestión de Inventario
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/sucursales}" th:classappend="${request.requestURI.startsWith('/admin/sucursales')} ? ' active' : ''">
+                            <i class="fas fa-store me-2"></i> Gestión de Sucursales
+                        </a>
+                    </li>
+<!-- Botón de Gestión de Pedidos -->
+<div class="row mt-4">
+    <div class="col-md-12">
+        <a class="btn btn-outline-primary" th:href="@{/admin/pedidos}">
+            <i class="fas fa-shopping-cart me-1"></i> Gestionar Pedidos
+        </a>
+    </div>
+</div>
+
+
+                    <li class="nav-item mt-3">
+                        <a class="nav-link text-danger" th:href="@{/logout}">
+                            <i class="fas fa-power-off me-2"></i> Cerrar sesión
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- Contenido Principal -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h2">Gestión de Platos</h1>
+
+                <!-- BOTÓN MODAL (REEMPLAZA al antiguo /admin/platos/nuevo) -->
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNuevoPlato">
+                    <i class="fas fa-plus me-2"></i> Agregar Plato
+                </button>
+            </div>
+
+            <!-- Mensajes de alerta -->
+            <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+            <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+            <!-- Botones de Exportación -->
+            <div class="mb-3">
+                <h5>Exportar Reportes:</h5>
+                <a th:href="@{/admin/reportes/platos/pdf}" class="btn btn-danger me-2">
+                    <i class="fas fa-file-pdf"></i> PDF Platos
+                </a>
+                <a th:href="@{/admin/reportes/platos/excel}" class="btn btn-success me-2">
+                    <i class="fas fa-file-excel"></i> Excel Platos
+                </a>
+            </div>
+
+            <!-- Tabla de Platos -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Descripción</th>
+                                    <th>Precio</th>
+                                    <th>Estado</th>
+                                    <th>Categoría</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="plato : ${platos}">
+                                    <td th:text="${plato.nombre}">Lomo Saltado</td>
+                                    <td th:text="${plato.descripcion}">Delicioso plato peruano</td>
+                                    <td th:text="'S/ ' + ${plato.precio}">S/ 25.00</td>
+                                    <td>
+                                        <span th:if="${plato.estado}" class="badge bg-success">Activo</span>
+                                        <span th:unless="${plato.estado}" class="badge bg-danger">Inactivo</span>
+                                    </td>
+                                    <td th:text="${plato.categoria.nombre}">Carnes</td>
+                                    <td>
+                                        
+
+                                        <form th:action="@{'/admin/platos/eliminar/' + ${plato.id}}"
+                                              method="post" style="display:inline">
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+
+                                        <form th:action="@{'/admin/platos/toggle-estado/' + ${plato.id}}"
+                                              method="post" style="display:inline">
+                                            <button type="submit" 
+                                                    th:classappend="${plato.estado} ? 'btn btn-sm btn-secondary' : 'btn btn-sm btn-success'">
+                                                <i class="fas" th:classappend="${plato.estado} ? ' fa-eye-slash' : ' fa-eye'"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</div>
+
+<!-- ======================= MODAL NUEVO PLATO ======================= -->
+<div class="modal fade" id="modalNuevoPlato" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Agregar Nuevo Plato</h5>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- FORMULARIO QUE SÍ GUARDA EN LA BD -->
+            <form action="/admin/platos" method="post" enctype="multipart/form-data">
+
+    <div class="modal-body">
+
+        <div class="mb-3">
+            <label class="form-label">Nombre del Plato</label>
+            <input type="text" name="nombre" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Descripción</label>
+            <textarea name="descripcion" class="form-control" rows="3" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Precio</label>
+            <input type="number" step="0.01" name="precio" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Imagen del Plato</label>
+            <input type="file" name="archivoImagen" class="form-control" accept="image/*" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Categoría</label>
+            <select name="categoria.id" class="form-select" required>
+                <option value="">Seleccione</option>
+                <option th:each="cat : ${categorias}"
+                        th:value="${cat.id}"
+                        th:text="${cat.nombre}">
+                </option>
+            </select>
+        </div>
+
+        <input type="hidden" name="estado" value="true">
+
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button class="btn btn-primary" type="submit">Guardar Plato</button>
+    </div>
+
+</form>
+
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

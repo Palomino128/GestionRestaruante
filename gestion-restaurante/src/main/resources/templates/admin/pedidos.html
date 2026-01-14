@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout (~{::body})">
+<head>
+    <title>Gestión de Pedidos - Sabor Peruano</title>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar px-2">
+            <div class="position-sticky pt-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/dashboard}" th:classappend="${request.requestURI.startsWith('/admin/dashboard')} ? ' active' : ''">
+                            <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/platos}" th:classappend="${request.requestURI.startsWith('/admin/platos')} ? ' active' : ''">
+                            <i class="fas fa-utensils me-2"></i> Gestión de Platos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/inventario}" th:classappend="${request.requestURI.startsWith('/admin/inventario')} ? ' active' : ''">
+                            <i class="fas fa-boxes me-2"></i> Gestión de Inventario
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/sucursales}" th:classappend="${request.requestURI.startsWith('/admin/sucursales')} ? ' active' : ''">
+                            <i class="fas fa-store me-2"></i> Gestión de Sucursales
+                        </a>
+                    </li>
+<!-- Botón de Gestión de Pedidos -->
+<div class="row mt-4">
+    <div class="col-md-12">
+        <a class="btn btn-outline-primary" th:href="@{/admin/pedidos}">
+            <i class="fas fa-shopping-cart me-1"></i> Gestionar Pedidos
+        </a>
+    </div>
+</div>
+
+
+                    <li class="nav-item mt-3">
+                        <a class="nav-link text-danger" th:href="@{/logout}">
+                            <i class="fas fa-power-off me-2"></i> Cerrar sesión
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Contenido Principal -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h2">Gestión de Pedidos</h1>
+            </div>
+
+            <!-- Mensajes de alerta -->
+            <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+            <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+            <!-- Tabla de Pedidos -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped align-middle">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Cliente</th>
+                                    <th>Fecha</th>
+                                    <th>Total</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="pedido : ${pedidos}">
+                                    <td th:text="${pedido.id}">1</td>
+                                    <td th:text="${pedido.usuario != null ? pedido.usuario.nombres + ' ' + pedido.usuario.apellidos : 'Sin cliente'}">Juan Perez</td>
+                                    <td th:text="${#temporals.format(pedido.fecha, 'dd/MM/yyyy HH:mm')}">07/12/2025 14:00</td>
+                                    <td th:text="${pedido.total}">120.00</td>
+                                    <td>
+                                        <span th:if="${pedido.estado == 'pendiente'}" class="badge bg-warning">Pendiente</span>
+                                        <span th:if="${pedido.estado == 'procesando'}" class="badge bg-info">Procesando</span>
+                                        <span th:if="${pedido.estado == 'entregado'}" class="badge bg-success">Entregado</span>
+                                        <span th:if="${pedido.estado == 'cancelado'}" class="badge bg-danger">Cancelado</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</div>
+
+</body>
+</html>

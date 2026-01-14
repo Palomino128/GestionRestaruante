@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout (~{::body})">
+<head>
+    <title>Gestión de Sucursales - Sabor Peruano</title>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+                <!-- Sidebar -->
+        <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar px-2">
+            <div class="position-sticky pt-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/dashboard}" th:classappend="${request.requestURI.startsWith('/admin/dashboard')} ? ' active' : ''">
+                            <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/platos}" th:classappend="${request.requestURI.startsWith('/admin/platos')} ? ' active' : ''">
+                            <i class="fas fa-utensils me-2"></i> Gestión de Platos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/inventario}" th:classappend="${request.requestURI.startsWith('/admin/inventario')} ? ' active' : ''">
+                            <i class="fas fa-boxes me-2"></i> Gestión de Inventario
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/sucursales}" th:classappend="${request.requestURI.startsWith('/admin/sucursales')} ? ' active' : ''">
+                            <i class="fas fa-store me-2"></i> Gestión de Sucursales
+                        </a>
+                    </li>
+<!-- Botón de Gestión de Pedidos -->
+<div class="row mt-4">
+    <div class="col-md-12">
+        <a class="btn btn-outline-primary" th:href="@{/admin/pedidos}">
+            <i class="fas fa-shopping-cart me-1"></i> Gestionar Pedidos
+        </a>
+    </div>
+</div>
+
+
+                    <li class="nav-item mt-3">
+                        <a class="nav-link text-danger" th:href="@{/logout}">
+                            <i class="fas fa-power-off me-2"></i> Cerrar sesión
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Contenido Principal -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h2">Gestión de Sucursales</h1>
+    <!-- Botón Agregar eliminado -->
+</div>
+
+            <!-- Mensajes de alerta -->
+            <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+            <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+<!-- Tabla de Sucursales -->
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Dirección</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="sucursal : ${sucursales}">
+                        <td th:text="${sucursal.nombre}">Sucursal Centro</td>
+                        <td th:text="${sucursal.direccion}">Av. Principal 123</td>
+                        <td>
+                            <span th:if="${sucursal.estado}" class="badge bg-success">En funcionamiento</span>
+                            <span th:unless="${sucursal.estado}" class="badge bg-danger">Cerrada</span>
+                        </td>
+                        <td>
+                            <!-- Botón para cambiar estado -->
+                            <form th:action="@{'/admin/sucursales/toggle-estado/' + ${sucursal.id}}"
+                                  method="post" style="display:inline">
+                                <button type="submit" class="btn btn-sm btn-secondary">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="mt-2 text-muted">* El estado de la sucursal se puede activar o desactivar con el botón gris.</p>
+        </div>
+    </div>
+</div>
+
+        </main>
+    </div>
+</div>
+
+</body>
+</html>

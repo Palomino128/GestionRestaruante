@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto - Sabor Peruano</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+  <style>
+    :root {
+      --color-principal: #8B0000;
+      --color-secundario: #FFD700;
+    }
+    .navbar { background-color: var(--color-principal) !important; }
+    .icono { color: var(--color-secundario); }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="/">
+        <i class="fas fa-utensils"></i> Sabor Peruano
+      </a>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="/nosotros">Nosotros</a></li>
+          <li class="nav-item"><a class="nav-link active" href="/contacto">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="text-white text-center py-5" style="background: url('https://images.unsplash.com/photo-1551218808-94e220e084d2') center/cover;">
+    <div class="container py-5">
+      <h1 class="display-5 fw-bold animate__animated animate__fadeInDown">Contáctanos</h1>
+      <p class="lead animate__animated animate__fadeInUp">Estamos aquí para ti</p>
+    </div>
+  </header>
+
+  <!-- Contacto -->
+  <section class="container my-5">
+    <div class="row">
+      <!-- Formulario -->
+      <div class="col-md-6" data-aos="fade-right">
+        <h3 class="mb-4">Envíanos un mensaje</h3>
+        <form>
+          <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            <input type="text" class="form-control" placeholder="Tu nombre completo" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Correo electrónico</label>
+            <input type="email" class="form-control" placeholder="ejemplo@correo.com" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Mensaje</label>
+            <textarea class="form-control" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-dark"><i class="fas fa-paper-plane"></i> Enviar</button>
+        </form>
+      </div>
+
+      <!-- Información -->
+      <div class="col-md-6" data-aos="fade-left">
+        <h3 class="mb-4">Información de contacto</h3>
+        <ul class="list-unstyled">
+          <li class="mb-3"><i class="fas fa-map-marker-alt icono me-2"></i> Av. Cerro Colorado 456, Arequipa Perú</li>
+          <li class="mb-3"><i class="fas fa-phone icono me-2"></i> 054-654321</li>
+          <li class="mb-3"><i class="fas fa-envelope icono me-2"></i> info@saborperuano.com</li>
+          <li><i class="fas fa-clock icono me-2"></i> Lunes - Domingo: 8:00 am - 11:00 pm</li>
+        </ul>
+        <div class="mt-4 shadow">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.634948027846!2d-77.0427936851876!3d-12.04637404552786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c8d2f5a6d8a5%3A0xf7e05e4c7e9f977e!2sPlaza%20de%20Armas%20de%20Lima!5e0!3m2!1ses!2spe!4v1670000000000"
+            width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3 mt-5">
+    <p>&copy; 2025 Sabor Peruano - Todos los derechos reservados</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init();</script>
+</body>
+</html>

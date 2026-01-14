@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Menú - Sabor Peruano</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <h1><i class="fas fa-utensils"></i> Nuestro Menú</h1>
+                <p class="text-muted">Descubre nuestra deliciosa selección de platos peruanos</p>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <label class="form-label"><strong>Seleccionar Sucursal:</strong></label>
+                        <select class="form-select" id="sucursalSelect">
+                            <option value="">Todas las sucursales</option>
+                            <option th:each="sucursal : ${sucursales}" 
+                                    th:value="${sucursal.id}"
+                                    th:text="${sucursal.nombre} + ' - ' + ${sucursal.distrito}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lista fija de platos -->
+        <div class="row">
+            <!-- Lomo Saltado -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="/img/lomo.jpg" class="card-img-top" alt="Lomo Saltado" style="height:200px; object-fit:cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Lomo Saltado</h5>
+                        <p class="card-text">Clásico lomo saltado con arroz y papas fritas</p>
+                        <span class="h5 text-danger">S/ 25.00</span>
+                        <button class="btn btn-danger w-100 mt-2"><i class="fas fa-cart-plus"></i> Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pollo a la Brasa -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="/img/pollo.jpg" class="card-img-top" alt="Pollo a la Brasa" style="height:200px; object-fit:cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Pollo a la Brasa 1/4</h5>
+                        <p class="card-text">Con papas fritas y ensalada</p>
+                        <span class="h5 text-danger">S/ 18.00</span>
+                        <button class="btn btn-danger w-100 mt-2"><i class="fas fa-cart-plus"></i> Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ceviche -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="/img/ceviche.jpg" class="card-img-top" alt="Ceviche" style="height:200px; object-fit:cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Ceviche Clásico</h5>
+                        <p class="card-text">Pescado fresco con camote y choclo</p>
+                        <span class="h5 text-danger">S/ 22.00</span>
+                        <button class="btn btn-danger w-100 mt-2"><i class="fas fa-cart-plus"></i> Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Causa Limeña -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="/img/causa.jpg" class="card-img-top" alt="Causa Limeña" style="height:200px; object-fit:cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Causa Limeña</h5>
+                        <p class="card-text">Causa rellena de pollo o atún</p>
+                        <span class="h5 text-danger">S/ 16.00</span>
+                        <button class="btn btn-danger w-100 mt-2"><i class="fas fa-cart-plus"></i> Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inca Kola -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="/img/incakola.jpg" class="card-img-top" alt="Inca Kola" style="height:200px; object-fit:cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Inca Kola</h5>
+                        <p class="card-text">La bebida del Perú</p>
+                        <span class="h5 text-danger">S/ 5.00</span>
+                        <button class="btn btn-danger w-100 mt-2"><i class="fas fa-cart-plus"></i> Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Cambio de sucursal
+        document.getElementById('sucursalSelect').addEventListener('change', function() {
+            const sucursalId = this.value;
+            if (sucursalId) {
+                window.location.href = '/menu?sucursalId=' + sucursalId;
+            } else {
+                window.location.href = '/menu';
+            }
+        });
+
+        function verCarrito() {
+            window.location.href = '/carrito';
+        }
+    </script>
+</body>
+</html>
