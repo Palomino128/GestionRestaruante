@@ -33,13 +33,6 @@ Based on the project's nature as a restaurant management system, the following c
 -   **Reporting**: Basic reporting on sales, popular items, or order history.
 -   **Responsive Design**: A user interface accessible across various devices (inferred for modern web apps).
 
-## 🖥️ Screenshots
-
-<!-- TODO: Add actual screenshots of the application in action -->
-![Dashboard Screenshot](https://placehold.co/800x450/png?text=Dashboard+Screenshot)
-![Menu Management Screenshot](https://placehold.co/800x450/png?text=Menu+Management+Screenshot)
-![Order Processing Screenshot](https://placehold.co/800x450/png?text=Order+Processing+Screenshot)
-
 ## 🛠️ Tech Stack
 
 This project is structured as a full-stack web application. While specific framework details within `gestion-restaurante/` are inferred due to limited recursive content, the following technologies are commonly used for such systems:
