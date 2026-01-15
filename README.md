@@ -2,8 +2,8 @@
 
 <div align="center">
 
-(<img width="225" height="225" alt="image" src="https://github.com/user-attachments/assets/c264b35c-4cb9-4d68-afcc-89b461bc2689" />
-) <!-- TODO: Add an actual project logo -->
+<img width="225" height="225" alt="image" src="https://github.com/user-attachments/assets/c264b35c-4cb9-4d68-afcc-89b461bc2689" />
+ <!-- TODO: Add an actual project logo -->
 
 [![GitHub stars](https://img.shields.io/github/stars/Palomino128/GestionRestaruante?style=for-the-badge)](https://github.com/Palomino128/GestionRestaruante/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/Palomino128/GestionRestaruante?style=for-the-badge)](https://github.com/Palomino128/GestionRestaruante/network)
