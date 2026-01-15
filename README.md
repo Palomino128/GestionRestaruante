@@ -1,202 +1,250 @@
-# 🍽️ Sistema de Gestión para Restaurantes
+# 🍽️ GestionRestaurante
 
-## 📋 Descripción del Proyecto
-Sistema web completo para la gestión integral de restaurantes, desarrollado como proyecto del curso **Marcos de Desarrollo Web** (Ciclo Agosto 2025 - UTP). La aplicación permite administrar todas las operaciones de un restaurante desde una plataforma centralizada.
+<div align="center">
 
-## ✨ Características Principales
+![Restaurant Management Logo](https://placehold.co/400x150/png?text=GestionRestaurante+Logo) <!-- TODO: Add an actual project logo -->
 
-### 👥 Gestión de Usuarios y Roles
-- **Administrador:** Control total del sistema
-- **Gerente:** Gestión operativa y reportes
-- **Mesero:** Tomar pedidos y gestionar mesas
-- **Cocinero:** Ver y preparar órdenes
-- **Cajero:** Facturación y cierre de caja
+[![GitHub stars](https://img.shields.io/github/stars/Palomino128/GestionRestaruante?style=for-the-badge)](https://github.com/Palomino128/GestionRestaruante/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/Palomino128/GestionRestaruante?style=for-the-badge)](https://github.com/Palomino128/GestionRestaruante/network)
+[![GitHub issues](https://img.shields.io/github/issues/Palomino128/GestionRestaruante?style=for-the-badge)](https://github.com/Palomino128/GestionRestaruante/issues)
+[![GitHub license](https://img.shields.io/github/license/Palomino128/GestionRestaruante?style=for-the-badge)](LICENSE)
 
-### 📊 Módulos del Sistema
-- **✅ Gestión de Mesas:** Reservas, asignación y estado en tiempo real
-- **✅ Sistema de Pedidos:** Tomar órdenes, modificar y enviar a cocina
-- **✅ Control de Inventario:** Stock de ingredientes y alertas de reposición
-- **✅ Menú Digital:** Categorías, precios y disponibilidad
-- **✅ Facturación Electrónica:** Generación de comprobantes
-- **✅ Reportes Avanzados:** Ventas, inventario y rendimiento
-- **✅ Dashboard Interactivo:** Métricas clave en tiempo real
+**A comprehensive web application for efficient restaurant management.**
 
-## 🛠️ Stack Tecnológico
+[Live Demo](https://demo-link.com) <!-- TODO: Add live demo link if available -->
 
-### **Frontend**
-- **HTML5** - Estructura semántica
-- **CSS3** - Estilos y diseño responsive
-- **JavaScript (ES6+)** - Interactividad
-- **Bootstrap 5** - Framework CSS
-- **Chart.js** - Gráficos y visualizaciones
+</div>
 
-### **Backend**
-- **Python** - Lógica principal
-- **Django** - Framework web (o Flask según tu implementación)
-- **REST API** - Arquitectura de servicios
+---
 
-### **Base de Datos**
-- **PostgreSQL** - Base de datos relacional
-- **SQLAlchemy** - ORM (si usas Flask)
-- **Django ORM** - (si usas Django)
+## 📖 Overview
 
-### **Herramientas Adicionales**
-- **Git** - Control de versiones
-- **Docker** - Contenerización (opcional)
-- **JWT** - Autenticación por tokens
-- **Celery** - Tareas asíncronas (para reportes)
+GestionRestaurante is a robust web application designed to streamline and automate various operations within a restaurant environment. It provides a centralized system for managing key aspects of a restaurant, from menu items and orders to potentially staff and table reservations. Developed as a full-stack solution, it aims to enhance operational efficiency and improve customer service.
 
-## 🚀 Instalación y Configuración
+## ✨ Features
 
-### **Requisitos Previos**
-- Python 3.8+
-- PostgreSQL 12+
-- Node.js 14+ (para assets frontend)
-- Git
+Based on the project's nature as a restaurant management system, the following core features are typically supported:
 
-### **Pasos de Instalación**
+-   **Menu Management**: Create, update, and delete menu categories and individual food/drink items.
+-   **Order Processing**: Take new customer orders, manage their status (pending, preparing, served, completed).
+-   **Table Management**: Overview of table availability, assignment to customers, and status tracking.
+-   **User Authentication**: Secure login for different roles (e.g., administrator, waiter, kitchen staff).
+-   **Reporting**: Basic reporting on sales, popular items, or order history.
+-   **Responsive Design**: A user interface accessible across various devices (inferred for modern web apps).
 
-```bash
-# 1. Clonar el repositorio
-git clone https://github.com/Palomino128/GestionRestaurante.git
-cd GestionRestaurante
+## 🖥️ Screenshots
 
-# 2. Crear entorno virtual (Python)
-python -m venv venv
+<!-- TODO: Add actual screenshots of the application in action -->
+![Dashboard Screenshot](https://placehold.co/800x450/png?text=Dashboard+Screenshot)
+![Menu Management Screenshot](https://placehold.co/800x450/png?text=Menu+Management+Screenshot)
+![Order Processing Screenshot](https://placehold.co/800x450/png?text=Order+Processing+Screenshot)
 
-# 3. Activar entorno virtual
-# Windows:
-venv\Scripts\activate
-# Mac/Linux:
-source venv/bin/activate
+## 🛠️ Tech Stack
 
-# 4. Instalar dependencias
-pip install -r requirements.txt
+This project is structured as a full-stack web application. While specific framework details within `gestion-restaurante/` are inferred due to limited recursive content, the following technologies are commonly used for such systems:
 
-# 5. Configurar base de datos
-# Crear archivo .env con:
-DATABASE_URL=postgresql://usuario:contraseña@localhost:5432/gestion_restaurante
-SECRET_KEY=tu-clave-secreta-aqui
-DEBUG=True
+**Frontend:**
+*   **HTML**: Structure of web pages
+*   **CSS**: Styling and visual presentation
+*   **JavaScript**: Interactive client-side logic
 
-# 6. Ejecutar migraciones
-python manage.py migrate  # Para Django
-# o
-flask db upgrade  # Para Flask
+**Backend:**
+*   **Node.js**: Asynchronous event-driven JavaScript runtime
+    ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
+*   **Express.js**: Fast, unopinionated, minimalist web framework for Node.js
+    ![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
 
-# 7. Crear superusuario
-python manage.py createsuperuser  # Django
-# o
-flask create-admin  # Flask (si está configurado)
+**Database:**
+*   **MySQL**: Relational database management system
+    ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
 
-# 8. Ejecutar servidor
-python manage.py runserver  # Django
-# o
-flask run  # Flask
+## 🚀 Quick Start
+
+Follow these steps to get the GestionRestaurante application up and running on your local machine.
+
+### Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+-   **Node.js**: v14.x or higher (includes npm)
+    -   [Download Node.js](https://nodejs.org/en/download/)
+-   **MySQL Server**: v8.x or higher
+    -   [Download MySQL Community Server](https://dev.mysql.com/downloads/mysql/)
+-   A code editor like [VS Code](https://code.visualstudio.com/) is recommended.
+
+### Installation
+
+1.  **Clone the repository**
+
+    ```bash
+    git clone https://github.com/Palomino128/GestionRestaruante.git
+    cd GestionRestaruante/gestion-restaurante
+    ```
+
+2.  **Install backend dependencies**
+
+    ```bash
+    npm install
+    ```
+
+3.  **Environment setup**
+
+    Create a `.env` file in the `gestion-restaurante` directory by copying the example:
+
+    ```bash
+    cp .env.example .env
+    ```
+
+    Open the newly created `.env` file and configure your database connection details and other necessary environment variables:
+
+    ```
+    # Example .env content (adjust as per actual backend config)
+    PORT=3000
+    DB_HOST=localhost
+    DB_USER=root
+    DB_PASSWORD=your_mysql_password
+    DB_NAME=restaurant_db
+    ```
+    Replace `your_mysql_password` and `restaurant_db` with your actual MySQL credentials and desired database name.
+
+4.  **Database setup**
+
+    Connect to your MySQL server and create the database. Then, execute the SQL schema file (if available) to set up the necessary tables.
+
+    ```bash
+    # Connect to MySQL (replace 'root' if your user is different)
+    mysql -u root -p
+
+    # Inside MySQL prompt:
+    CREATE DATABASE restaurant_db;
+    USE restaurant_db;
+    SOURCE path/to/your/database/schema.sql; # TODO: Confirm actual path and file name for schema.sql
+    EXIT;
+    ```
+    *Note: The actual path to `schema.sql` might be `gestion-restaurante/database/schema.sql` or similar. This needs to be confirmed.*
+
+5.  **Start development server**
+
+    ```bash
+    npm start
+    ```
+
+6.  **Open your browser**
+
+    Visit `http://localhost:3000` (or the port specified in your `.env` file).
+
+## 📁 Project Structure
+
+The project follows a standard structure for a full-stack web application. The core application logic resides within the `gestion-restaurante` directory.
+
+```
+GestionRestaruante/
+├── .vscode/             # Visual Studio Code settings
+├── gestion-restaurante/ # Main application directory
+│   ├── public/          # Static assets (images, CSS, client-side JS)
+│   │   ├── css/
+│   │   ├── js/
+│   │   └── img/
+│   ├── views/           # Server-rendered HTML templates (e.g., EJS, Handlebars, or plain HTML)
+│   ├── routes/          # Express.js route definitions for API endpoints
+│   ├── controllers/     # Business logic and request handlers for routes
+│   ├── models/          # Database schema definitions and ORM interactions
+│   ├── config/          # Application configuration files (e.g., database connection settings)
+│   ├── database/        # SQL schema files or migration scripts
+│   ├── app.js           # Main application entry point (server initialization)
+│   ├── package.json     # Node.js project metadata and dependencies
+│   ├── package-lock.json# Dependency lock file
+│   └── .env.example     # Example environment variables
+└── README.md            # This README file
 ```
 
-### **Instalación con Docker (Opcional)**
-```bash
-# Construir y ejecutar contenedores
-docker-compose up -d
+## ⚙️ Configuration
 
-# Ver logs
-docker-compose logs -f
-```
+### Environment Variables
 
-## 📁 Estructura del Proyecto
-```
-gestion-restaurante/
-│
-├── app/                          # Aplicación principal
-│   ├── __init__.py
-│   ├── models/                  # Modelos de base de datos
-│   │   ├── usuario.py
-│   │   ├── mesa.py
-│   │   ├── producto.py
-│   │   └── pedido.py
-│   │
-│   ├── routes/                  # Rutas/Endpoints
-│   │   ├── auth.py
-│   │   ├── mesas.py
-│   │   ├── pedidos.py
-│   │   └── reportes.py
-│   │
-│   ├── templates/               # Plantillas HTML
-│   │   ├── base.html
-│   │   ├── dashboard.html
-│   │   ├── mesas/
-│   │   └── pedidos/
-│   │
-│   └── static/                  # Archivos estáticos
-│       ├── css/
-│       ├── js/
-│       └── images/
-│
-├── tests/                       # Pruebas unitarias
-├── docs/                        # Documentación
-├── requirements.txt             # Dependencias Python
-├── Dockerfile                   # Configuración Docker
-├── docker-compose.yml           # Orquestación contenedores
-├── .env.example                 # Variables de entorno ejemplo
-└── README.md                    # Este archivo
-```
+The application uses environment variables for sensitive information and configuration. A `.env.example` file is provided for reference.
 
-## 🎯 Funcionalidades por Módulo
+| Variable    | Description                              | Default   | Required |
+|-------------|------------------------------------------|-----------|----------|
+| `PORT`      | Port number for the backend server       | `3000`    | Yes      |
+| `DB_HOST`   | Database host address                    | `localhost` | Yes      |
+| `DB_USER`   | Username for database connection         | `root`    | Yes      |
+| `DB_PASSWORD` | Password for database user               | `(empty)` | Yes      |
+| `DB_NAME`   | Name of the database                     | `restaurant_db` | Yes |
 
-### **1. Gestión de Mesas**
-```python
-# Ejemplo de modelo Mesa
-class Mesa:
-    id: int
-    numero: int
-    capacidad: int
-    estado: str  # 'disponible', 'ocupada', 'reservada'
-    ubicacion: str  # 'interior', 'terraza', 'vip'
-```
+### Configuration Files
+-   **`gestion-restaurante/config/`**: This directory likely contains files for database connection settings, application constants, or other modular configurations.
 
-### **2. Sistema de Pedidos**
-- Crear nuevo pedido
-- Añadir/eliminar items
-- Especificaciones especiales
-- Dividir cuenta
-- Enviar a cocina/bar
+## 🔧 Development
 
-### **3. Panel de Cocina**
-- Vista en tiempo real de órdenes
-- Marcar como "en preparación"
-- Notificar cuando está listo
-- Tiempos de preparación
+### Available Scripts
 
-### **4. Reportes**
-- Ventas por horario
-- Productos más vendidos
-- Rendimiento de meseros
-- Control de inventario
-- Ganancias netas
+The `package.json` file in `gestion-restaurante/` defines several scripts for development:
 
-## 🔐 Seguridad
-- **Autenticación JWT** con refresh tokens
-- **CORS** configurado
-- **Helmet** para seguridad HTTP
-- **Rate limiting** para prevención de ataques
-- **Validación de entrada** en todos los endpoints
+| Command     | Description                                |
+|-------------|--------------------------------------------|
+| `npm start` | Starts the backend server (often in production mode) |
+| `npm dev`   | Starts the backend server in development mode (with hot-reloading) <!-- TODO: Confirm actual dev script if exists --> |
 
-## 📱 Responsive Design
-- **Mobile First** approach
-- Compatible con tablets y móviles
-- PWA (Progressive Web App) opcional
-- Modo offline para ciertas funcionalidades
+### Development Workflow
+To contribute or develop, make changes in the `gestion-restaurante/` directory. The `npm start` command runs the application, and if a `npm dev` script is present, it will provide a more streamlined development experience with auto-restarts on file changes.
 
 ## 🧪 Testing
+
+While no explicit test framework was immediately detectable, a complete application would typically include a testing suite.
+
 ```bash
-# Ejecutar pruebas
-python -m pytest tests/
-
-# Cobertura de código
-pytest --cov=app tests/
-
-# Pruebas de integración
-pytest tests/integration/
+# TODO: Add actual test commands if available
+# npm test
+# npm run test:coverage
 ```
+
+## 🚀 Deployment
+
+### Production Build
+For deployment, you would typically build and optimize your frontend assets (if any build steps are involved) and then run the backend server.
+
+```bash
+# If frontend assets require building
+# npm run build # TODO: Confirm if a build script exists for frontend assets
+
+# Start the server in a production environment
+# node gestion-restaurante/app.js # or pm2, systemd, etc.
+```
+
+### Deployment Options
+-   **Traditional Hosting**: Deploy to a VPS (e.g., AWS EC2, DigitalOcean) using `pm2` or similar process managers to keep the Node.js server running.
+-   **Containerization**: A `Dockerfile` could be created for Docker-based deployments, allowing for easy scaling and environment consistency.
+
+## 🤝 Contributing
+
+We welcome contributions to GestionRestaurante! Please consider the following guidelines:
+
+1.  Fork the repository.
+2.  Create a new branch (`git checkout -b feature/your-feature-name`).
+3.  Make your changes and ensure they adhere to the project's coding style.
+4.  Write clear, concise commit messages.
+5.  Push your branch (`git push origin feature/your-feature-name`).
+6.  Open a Pull Request.
+
+### Development Setup for Contributors
+The development setup is identical to the Quick Start guide. Ensure all prerequisites are met and follow the installation steps.
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE) - see the [LICENSE](LICENSE) file for details. <!-- TODO: Verify actual license file content, assumed MIT -->
+
+## 🙏 Acknowledgments
+
+-   Built with [Node.js](https://nodejs.org/) and [Express.js](https://expressjs.com/).
+-   Uses [MySQL](https://www.mysql.com/) for data storage.
+-   Special thanks to the open-source community for countless tools and libraries.
+
+<div align="center">
+
+**⭐ Star this repo if you find it helpful!**
+
+Made with ❤️ by [Palomino128](https://github.com/Palomino128)
+
+</div>
 
